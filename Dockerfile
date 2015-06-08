@@ -3,7 +3,7 @@ FROM stackbrew/ubuntu:trusty
 RUN apt-get update && apt-get install -y curl logrotate
 
 # Get latest from https://mms.mongodb.com/settings/backup-agent
-RUN curl -sSL https://mms.mongodb.com/download/agent/backup/mongodb-mms-backup-agent_3.3.0.261-1_amd64.deb -o mms.deb
+RUN curl -sSL https://mms.mongodb.com/download/agent/backup/mongodb-mms-backup-agent_3.4.0.273-1_amd64.deb -o mms.deb
 RUN dpkg -i mms.deb
 RUN rm mms.deb
 
