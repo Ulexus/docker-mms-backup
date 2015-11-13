@@ -4,14 +4,15 @@ After=docker.service
 
 [Service]
 EnvironmentFile=/etc/environment
-;Environment=MMS_API_KEY=YourAPIKey
-ExecStartPre=/usr/bin/docker pull ulexus/mms-backup
-ExecStartPre=-/usr/bin/docker pull ibuildthecloud/systemd-docker
-ExecStartPre=-/usr/bin/docker run --rm -v /opt/bin:/opt/bin ibuildthecloud/systemd-docker
-ExecStart=/opt/bin/systemd-docker --env run --rm --name %p ulexus/mms-backup
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=-/usr/bin/docker pull ulexus/mms-backup
+ExecStart=/usr/bin/docker run --rm --name %p \
+   -e MMS_API_KEY=MyMMSAPIKey1234 \
+   ulexus/mms-backup
+ExecStopPost=-/usr/bin/docker stop %p
+ExecStopPost=-/usr/bin/docker rm %p
 Restart=always
 RestartSec=10s
-Type=notify
-NotifyAccess=all
 TimeoutStartSec=120
 TimeoutStopSec=15
