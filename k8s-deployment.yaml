@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: agent
-        image: ulexus/mms-backup:5.9.0
-        imagePullPolicy: Always
+        image: ulexus/mms-backup:6.8.3
+        imagePullPolicy: IfNotPresent
         env:
         - name: MMS_API_KEY
           valueFrom:
